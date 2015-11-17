@@ -67,14 +67,24 @@ public class MainActivity extends AppCompatActivity {
 
         getRandom();
         String strr = getRandom().name;
-        MyLog.showLog(strr);
+        MyLog.showLog("getRandom() Name: "+strr);
 
+        String name1 = getRandom(restaurant).name;
+        MyLog.showLog("getRandom(category) Name: " + name1);
 
     }
 
     public static Item getRandom(){
         return new Select().from(Item.class).orderBy("RANDOM()").executeSingle();
     }
+
+    public static Item getRandom(Category category){
+        return new Select().from(Item.class)
+                .where("Category = ?" , category.getId())
+                .orderBy("RANDOM()")
+                .executeSingle();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
