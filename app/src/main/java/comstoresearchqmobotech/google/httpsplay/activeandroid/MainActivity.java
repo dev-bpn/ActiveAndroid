@@ -9,6 +9,8 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
+import java.util.List;
+
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Category;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Item;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.log.MyLog;
@@ -72,19 +74,36 @@ public class MainActivity extends AppCompatActivity {
         String name1 = getRandom(restaurant).name;
         MyLog.showLog("getRandom(category) Name: " + name1);
 
+        Item item1 = null;
+        for(int i = 0 ; i < getAll(restaurant).size() ; i++) {
+             item1 = getAll(restaurant).get(i);
+            String name = item1.name;
+            MyLog.showLog("getAll(category) Name: " + name);
+        }
+
+
     }
 
     public static Item getRandom(){
-        return new Select().from(Item.class).orderBy("RANDOM()").executeSingle();
-    }
-
-    public static Item getRandom(Category category){
         return new Select().from(Item.class)
-                .where("Category = ?" , category.getId())
                 .orderBy("RANDOM()")
                 .executeSingle();
     }
 
+    public static Item getRandom(Category category){
+        return new Select().from(Item.class)
+                .where("Category = ?", category.getId())
+                .orderBy("RANDOM()")
+                .executeSingle();
+    }
+
+    public static List<Item> getAll(Category category){
+
+        return new Select().from(Item.class)
+                .where("Category = ?", category.getId())
+                .orderBy("Name ASC")
+                .execute();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
