@@ -16,4 +16,14 @@ public class Item extends Model {
     @Column(name="Category")
     public Catagory catagory;
 
+    public Item(){
+        super();
+    }
+
+    // If we define our custom constructor , we have to define the default constructor as well
+    public Item(String name , Catagory catagory){
+        this.name = name;
+        this.catagory = catagory;
+    }
+
 }
