@@ -14,16 +14,16 @@ public class Item extends Model {
     public String name;
 
     @Column(name="Category")
-    public Catagory catagory;
+    public Category category;
 
     public Item(){
         super();
     }
 
     // If we define our custom constructor , we have to define the default constructor as well
-    public Item(String name , Catagory catagory){
+    public Item(String name , Category category){
         this.name = name;
-        this.catagory = catagory;
+        this.category = category;
     }
 
 }
