@@ -1,11 +1,12 @@
 package comstoresearchqmobotech.google.httpsplay.activeandroid;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.activeandroid.ActiveAndroid;
+import com.activeandroid.query.Delete;
 
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Category;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Item;
@@ -48,6 +49,21 @@ public class MainActivity extends AppCompatActivity {
         } finally{
             ActiveAndroid.endTransaction();
         }
+
+
+//          // Deleting Records
+//        Item item1 = Item.load(Item.class , 1);
+//        item1.delete();
+//        MyLog.showLog("Item at 1 deleted");
+
+        // Deleting Statically
+        Item.delete(Item.class , 1);
+        MyLog.showLog("Item at 1 deleted statically");
+
+        // Deleting by Query Database
+        new Delete().from(Item.class).where("Id = ?" , 1).execute();
+        MyLog.showLog("Item at 1 deleted By using Query");
+
 
     }
 
