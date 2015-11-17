@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Delete;
+import com.activeandroid.query.Select;
 
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Category;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Item;
@@ -64,7 +65,15 @@ public class MainActivity extends AppCompatActivity {
         new Delete().from(Item.class).where("Id = ?" , 1).execute();
         MyLog.showLog("Item at 1 deleted By using Query");
 
+        getRandom();
+        String strr = getRandom().name;
+        MyLog.showLog(strr);
 
+
+    }
+
+    public static Item getRandom(){
+        return new Select().from(Item.class).orderBy("RANDOM()").executeSingle();
     }
 
     @Override
