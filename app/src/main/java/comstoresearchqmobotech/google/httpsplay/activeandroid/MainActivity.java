@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.activeandroid.ActiveAndroid;
+
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Category;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.Item;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.log.MyLog;
@@ -32,6 +34,20 @@ public class MainActivity extends AppCompatActivity {
         item.save();
         MyLog.showLog("Restaurants name saved");
 
+
+        // Bulk Insertion
+        try {
+            ActiveAndroid.beginTransaction();
+
+            for (int i = 0 ; i < 100 ; i++){
+                Item item1 = new Item();
+                item1.name = "Example: "+ i;
+                item1.save();
+            }
+            MyLog.showLog("Bulk insertion Succeed");
+        } finally{
+            ActiveAndroid.endTransaction();
+        }
 
     }
 
