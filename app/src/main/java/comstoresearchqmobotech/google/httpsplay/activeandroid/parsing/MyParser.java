@@ -62,6 +62,7 @@ public class MyParser {
             for(int i = 0 ; i < results.length() ; i ++){
                 JSONObject jsonObject1 = results.getJSONObject(i);
 //                MyDays.getDays(jsonObject1 , i);
+                MyData.getData(jsonObject1);
             }
         } catch (JSONException e) {
             e.printStackTrace();
