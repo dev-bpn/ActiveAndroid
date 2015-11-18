@@ -15,6 +15,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "POST_LOAD", '"https://api.import.io/store/data/3b2e399a-79f9-416d-8958-b51d64772a53/_query?_user=9233c692-537f-4594-b799-fb2205a1074e&_apikey=9233c692537f4594b799fb2205a1074eb39e630c37c0914ed01fcb84dd0748a4ccc3d573dd764382db3e8c0568e20bd5e65e2670b26bdcedeb163b073146057551faa3cfd012eede3a59028fe3ede24e"'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "POST_LOAD", '"https://api.import.io/store/data/3b2e399a-79f9-416d-8958-b51d64772a53/_query?_user=9233c692-537f-4594-b799-fb2205a1074e&_apikey=9233c692537f4594b799fb2205a1074eb39e630c37c0914ed01fcb84dd0748a4ccc3d573dd764382db3e8c0568e20bd5e65e2670b26bdcedeb163b073146057551faa3cfd012eede3a59028fe3ede24e"'
         }
     }
 }

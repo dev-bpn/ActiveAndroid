@@ -19,14 +19,18 @@ public class DataItems extends Model {
     @Column(name="ImageLink" , index = true)
     private String image;
 
+    @Column(name="PageLink" , index = true)
+    private String titleLink;
+
     public DataItems(){
         super();
     }
 
-    public DataItems(String title, String description, String image) {
+    public DataItems(String title, String description, String image , String titleLink) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.titleLink = titleLink;
     }
 
 }
