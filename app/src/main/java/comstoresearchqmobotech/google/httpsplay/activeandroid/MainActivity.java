@@ -18,16 +18,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getData();
 
+
     }
 
     private void getData(){
 
-        if(MyUtils.isNetworkConnected(this)){
-
-            MyParser.performVolleyRequest(this, Apis.POST_URL);
-
-        }else{
-            MyToast.showToast(this, "No Internet Connectivity");
+        if(MyUtils.isTableDataExists())
+        {
+            MyToast.showToast(this, "Show data from Database");
+        }
+        else
+        {
+            if(MyUtils.isNetworkConnected(this))
+            {
+                MyParser.performVolleyRequest(this, Apis.POST_URL);
+            }
+            else
+            {
+                MyToast.showToast(this, "No Internet Connectivity");
+            }
         }
 
     }
