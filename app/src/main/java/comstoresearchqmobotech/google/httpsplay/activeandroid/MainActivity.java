@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.MyParser;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.toast.MyToast;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.utils.MyUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener{
 
     private ExpandableListView expandableListView;
     private ExpandableListAdapter adapter;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         expandableListView.setGroupIndicator(null);
         dataList = getGroupList();
         expandableListView.setAdapter(new ExpandableListAdapter(this , dataList));
+        expandableListView.setOnChildClickListener(this);
 
     }
 
@@ -66,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         return list;
     }
 
+    @Override
+    public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+        MyToast.showToast(getApplicationContext() , "Child Item is clicked");
+        return false;
+    }
 
     private void getData(){
 
@@ -108,4 +115,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
