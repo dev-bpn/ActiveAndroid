@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getData();
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListView.setGroupIndicator(null);
         dataList = getGroupList();
         expandableListView.setAdapter(new ExpandableListAdapter(this , dataList));
 
