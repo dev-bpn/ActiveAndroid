@@ -7,15 +7,43 @@ import java.util.ArrayList;
  */
 public class Group {
 
-    private String name;
+    private Integer groupImageRing;
+    private String groupNum;
+    private String groupTitle;
+    private String groupDescription;
+
     private ArrayList<Child> item;
 
-    public String getName() {
-        return name;
+    public Integer getGroupImageRing() {
+        return groupImageRing;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGroupImageRing(Integer groupImageRing) {
+        this.groupImageRing = groupImageRing;
+    }
+
+    public String getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(String groupNum) {
+        this.groupNum = groupNum;
+    }
+
+    public String getGroupTitle() {
+        return groupTitle;
+    }
+
+    public void setGroupTitle(String groupTitle) {
+        this.groupTitle = groupTitle;
+    }
+
+    public String getGroupDescription() {
+        return groupDescription;
+    }
+
+    public void setGroupDescription(String groupDescription) {
+        this.groupDescription = groupDescription;
     }
 
     public ArrayList<Child> getItem() {

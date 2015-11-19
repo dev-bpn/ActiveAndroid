@@ -5,22 +5,13 @@ package comstoresearchqmobotech.google.httpsplay.activeandroid.model;
  */
 public class Child {
 
-    private String name;
-    private int image;
+    private int childImage;
 
-    public String getName() {
-        return name;
+    public int getChildImage() {
+        return childImage;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    public void setChildImage(int childImage) {
+        this.childImage = childImage;
     }
 }

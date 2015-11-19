@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp" >
 
-    <TextView
-        android:id="@+id/group_name"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="25dp"
-        android:textSize="25sp" />
+        android:id="@+id/relativeLayout">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imageViewRing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ring"/>
+
+        <TextView
+            android:text="1"
+            android:id="@+id/textViewNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="My Title Here"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout"
+        android:layout_alignTop="@+id/relativeLayout" />
+
+    <TextView
+        android:id="@+id/textViewTitleDescription"
+        android:paddingLeft="10dp"
+        android:text="Title Description Here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/textViewTitle" />
+
+</RelativeLayout>

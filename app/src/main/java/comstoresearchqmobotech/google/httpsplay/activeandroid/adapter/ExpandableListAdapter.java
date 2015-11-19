@@ -8,9 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import comstoresearchqmobotech.google.httpsplay.activeandroid.R;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Child;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Group;
@@ -21,31 +19,31 @@ import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Group;
 public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     private Context context;
-    private ArrayList<Group> groups;
+    private ArrayList<Group> group;
 
-    public ExpandableListAdapter(Context context, ArrayList<Group> groups) {
+    public ExpandableListAdapter(Context context, ArrayList<Group> group) {
         this.context = context;
-        this.groups = groups;
+        this.group = group;
     }
 
     @Override
     public int getGroupCount() {
-        return groups.size();
+        return group.size();
     }
 
     @Override
     public int getChildrenCount(int position) {
-        return groups.get(position).getItem().size();
+        return group.get(position).getItem().size();
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
-        return groups.get(groupPosition);
+    public Object getGroup(int position) {
+        return group.get(position);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return groups.get(groupPosition).getItem().get(childPosition);
+        return group.get(groupPosition).getItem().get(childPosition);
     }
 
     @Override
@@ -64,42 +62,45 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup parent) {
+    public View getGroupView(int groupPosition, boolean b, View view, ViewGroup viewGroup) {
 
         // always expand
-        ExpandableListView mExpandableListView = (ExpandableListView) parent;
+        ExpandableListView mExpandableListView = (ExpandableListView) viewGroup;
         mExpandableListView.expandGroup(groupPosition);
 
         Group group = (Group) getGroup(groupPosition);
-        if(convertView == null){
+        if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_group , null);
+            view = inflater.inflate(R.layout.list_group , null);
         }
-        TextView textView = (TextView) convertView.findViewById(R.id.group_name);
-        textView.setText(group.getName());
+        TextView textViewNum = (TextView) view.findViewById(R.id.textViewNum);
+        TextView textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+        TextView textViewDescription = (TextView) view.findViewById(R.id.textViewTitleDescription);
+        ImageView imageViewRing = (ImageView) view.findViewById(R.id.imageViewRing);
 
-        return convertView;
+        textViewNum.setText(group.getGroupNum());
+        textViewTitle.setText(group.getGroupTitle());
+        textViewDescription.setText(group.getGroupDescription());
+        imageViewRing.setImageResource(group.getGroupImageRing());
+
+        return view;
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean b, View convertView, ViewGroup parent) {
-
+    public View getChildView(int groupPosition, int childPosition, boolean b, View view, ViewGroup viewGroup) {
         Child child = (Child) getChild(groupPosition , childPosition);
-        if(convertView == null){
+        if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_child , null);
+            view = inflater.inflate(R.layout.list_child , null);
         }
-        TextView textView = (TextView) convertView.findViewById(R.id.country_name);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.flag);
-
-        textView.setText(child.getName());
-        imageView.setImageResource(child.getImage());
-
-        return convertView;
+        ImageView imageViewShare = (ImageView) view.findViewById(R.id.imageViewShare);
+        imageViewShare.setImageResource(child.getChildImage());
+        return view;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
 }

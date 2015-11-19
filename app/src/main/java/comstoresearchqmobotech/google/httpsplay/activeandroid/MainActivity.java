@@ -28,61 +28,43 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getData();
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        expListItems = setStandardGroups();
+        expandableListView.setGroupIndicator(null);
+        expListItems = setStandardGroup();
         expandableListView.setAdapter(new ExpandableListAdapter(this , expListItems));
-
 
     }
 
-    private ArrayList<Group> setStandardGroups() {
+    private ArrayList<Group> setStandardGroup() {
 
-        String group_names[] = { "GROUP A", "GROUP B", "GROUP C", "GROUP D",
-                "GROUP E", "GROUP F", "GROUP G", "GROUP H" };
-
-        String country_names[] = { "Brazil", "Mexico", "Croatia", "Cameroon",
-                "Netherlands", "chile", "Spain", "Australia", "Colombia",
-                "Greece", "Ivory Coast", "Japan", "Costa Rica", "Uruguay",
-                "Italy", "England", "France", "Switzerland", "Ecuador",
-                "Honduras", "Agrentina", "Nigeria", "Bosnia and Herzegovina",
-                "Iran", "Germany", "United States", "Portugal", "Ghana",
-                "Belgium", "Algeria", "Russia", "Korea Republic" };
-
-        int images[] = { R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                };
+        int group_image_ring[] = {R.drawable.ring , R.mipmap.ic_launcher , R.mipmap.ic_launcher};
+        String group_num[] = {"1" , "2" , "3"};
+        String group_title[] = {"title1" , "title2" , "title3"};
+        String group_description[] = {"Here is mah desc1 honey" , "Here is mah desc2 honey" , "Here is mah desc3 honey"};
+        int child_image_share[] = {R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring};
 
         ArrayList<Group> list = new ArrayList<>();
-        ArrayList<Child> child_list;
-        int size = 4;
+        ArrayList<Child> list_child;
+        int size = 1 ;
         int j = 0;
 
-        for(String group_name : group_names){
-
+        for(int i = 0 ; i < group_title.length ; i++){
             Group group = new Group();
-            group.setName(group_name);
-            child_list = new ArrayList<>();
+            group.setGroupTitle(group_title[i]);
+            group.setGroupNum(group_num[i]);
+            group.setGroupDescription(group_description[i]);
+            group.setGroupImageRing(group_image_ring[i]);
+
+            list_child = new ArrayList<>();
             for(; j < size ; j++){
+
                 Child child = new Child();
-                child.setName(country_names[j]);
-                child.setImage(images[j]);
-                child_list.add(child);
+                child.setChildImage(child_image_share[j]);
+                list_child.add(child);
             }
-
-            group.setItem(child_list);
+            group.setItem(list_child);
             list.add(group);
-
-            size = size + 4;
+            size = size+1;
         }
-
         return list;
     }
 
