@@ -5,5 +5,13 @@ package comstoresearchqmobotech.google.httpsplay.activeandroid.model;
  */
 public class Child {
 
-    
+    private int childImage;
+
+    public int getChildImage() {
+        return childImage;
+    }
+
+    public void setChildImage(int childImage) {
+        this.childImage = childImage;
+    }
 }

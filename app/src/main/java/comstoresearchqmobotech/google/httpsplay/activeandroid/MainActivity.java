@@ -6,6 +6,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 
+import java.util.ArrayList;
+
+import comstoresearchqmobotech.google.httpsplay.activeandroid.adapter.ExpandableListAdapter;
+import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Child;
+import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Group;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.Apis;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.MyParser;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.toast.MyToast;
@@ -14,6 +19,8 @@ import comstoresearchqmobotech.google.httpsplay.activeandroid.utils.MyUtils;
 public class MainActivity extends AppCompatActivity {
 
     private ExpandableListView expandableListView;
+    private ExpandableListAdapter adapter;
+    private ArrayList<Group> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +28,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getData();
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        dataList = getGroupList();
+        expandableListView.setAdapter(new ExpandableListAdapter(this , dataList));
 
+    }
+
+    private ArrayList<Group> getGroupList() {
+
+        int[] imageViewRing = {R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring};
+        String[] textViewNum = {"1" , "2" , "3"};
+        String[] textViewTitle = {"title 1" , "title 2" , "title 3"};
+        String[] textViewDescription = {"description1", "description 2" , "description 3"};
+        int[] imageViewShare = { R.mipmap.ic_launcher};
+
+        ArrayList<Group> list = new ArrayList<>();
+        ArrayList<Child> childArrayList = null;
+
+        for (int i = 0 ; i < textViewDescription.length ; i++){
+            Group group = new Group();
+            group.setGroupImage(imageViewRing[i]);
+            group.setGroupNum(textViewNum[i]);
+            group.setGroupTitle(textViewTitle[i]);
+            group.setGroupTitleDescription(textViewDescription[i]);
+
+            for(int j = 0 ; j < 1 ; j++){
+
+                Child child = new Child();
+                 childArrayList = new ArrayList<>();
+                child.setChildImage(imageViewShare[j]);
+                childArrayList.add(child);
+            }
+            group.setChildItems(childArrayList);
+            list.add(group);
+        }
+
+        return list;
     }
 
 
