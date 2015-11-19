@@ -17,7 +17,7 @@ import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.MyParser;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.toast.MyToast;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.utils.MyUtils;
 
-public class MainActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener{
+public class MainActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener, ExpandableListView.OnGroupClickListener {
 
     private ExpandableListView expandableListView;
     private ExpandableListAdapter adapter;
@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListView.setGroupIndicator(null);
         dataList = getGroupList();
-        expandableListView.setAdapter(new ExpandableListAdapter(this , dataList));
+        expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
         expandableListView.setOnChildClickListener(this);
+        expandableListView.setOnGroupClickListener(this);
 
     }
 
@@ -71,6 +72,22 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
         MyToast.showToast(getApplicationContext() , "Child Item is clicked");
+        return false;
+    }
+
+    @Override
+    public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+        switch (i){
+            case 0:
+                MyToast.showToast(getApplicationContext() , "Group Item 1 is clicked");
+                break;
+            case 1:
+                MyToast.showToast(getApplicationContext() , "Group Item 2 is clicked");
+                break;
+            case 2:
+                MyToast.showToast(getApplicationContext() , "Group Item 3 is clicked");
+                break;
+        }
         return false;
     }
 
