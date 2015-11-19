@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,6 +65,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+
+        // always expand
+        ExpandableListView mExpandableListView = (ExpandableListView) viewGroup;
+        mExpandableListView.expandGroup(i);
+
         Group group = (Group) getGroup(i);
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
