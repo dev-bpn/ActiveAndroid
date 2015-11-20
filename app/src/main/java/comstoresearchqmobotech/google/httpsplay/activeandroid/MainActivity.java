@@ -36,23 +36,31 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getData();
+        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListView.setGroupIndicator(null);
+        dataForExpandableList();
+        dataList = getGroupList();
+        expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
+        expandableListView.setOnChildClickListener(this);
+        expandableListView.setOnGroupClickListener(this);
 
     }
 
     private void dataForExpandableList(){
 
-        List<DataItems> queryResults = new Select().from(DataItems.class).orderBy("Id ASC").execute();
+        if(MyUtils.isTableDataExists()) {
+            List<DataItems> queryResults = new Select().from(DataItems.class).orderBy("Id ASC").execute();
 
-        titleList = new ArrayList<>();
-        descList = new ArrayList<>();
-        titleLink = new ArrayList<>();
+            titleList = new ArrayList<>();
+            descList = new ArrayList<>();
+            titleLink = new ArrayList<>();
 
-        for(int i = 10; i < 20 ; i++){
-            titleList.add(queryResults.get(i).getTitle());
-            descList.add(queryResults.get(i).getDescription());
-            titleLink.add(queryResults.get(i).getTitleLink());
+            for (int i = 10; i < 20; i++) {
+                titleList.add(queryResults.get(i).getTitle());
+                descList.add(queryResults.get(i).getDescription());
+                titleLink.add(queryResults.get(i).getTitleLink());
+            }
         }
-
     }
 
 
@@ -68,24 +76,25 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         ArrayList<Group> list = new ArrayList<>();
         ArrayList<Child> childArrayList = null;
 
-        for (int i = 0 ; i < textViewNum.length ; i++){
-            Group group = new Group();
-            group.setGroupImage(imageViewRing[i]);
-            group.setGroupNum(textViewNum[i]);
-            group.setGroupTitle(titleList.get(i));
-            group.setGroupTitleDescription(descList.get(i));
+        if(MyUtils.isTableDataExists()) {
+            for (int i = 0; i < textViewNum.length; i++) {
+                Group group = new Group();
+                group.setGroupImage(imageViewRing[i]);
+                group.setGroupNum(textViewNum[i]);
+                group.setGroupTitle(titleList.get(i));
+                group.setGroupTitleDescription(descList.get(i));
 
-            for(int j = 0 ; j < 1 ; j++){
+                for (int j = 0; j < 1; j++) {
 
-                Child child = new Child();
-                 childArrayList = new ArrayList<>();
-                child.setChildImage(imageViewShare[j]);
-                childArrayList.add(child);
+                    Child child = new Child();
+                    childArrayList = new ArrayList<>();
+                    child.setChildImage(imageViewShare[j]);
+                    childArrayList.add(child);
+                }
+                group.setChildItems(childArrayList);
+                list.add(group);
             }
-            group.setChildItems(childArrayList);
-            list.add(group);
         }
-
         return list;
     }
 
@@ -127,13 +136,6 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         if(MyUtils.isTableDataExists())
         {
             MyToast.showToast(this, "Show data from Database");
-            expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-            expandableListView.setGroupIndicator(null);
-            dataForExpandableList();
-            dataList = getGroupList();
-            expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
-            expandableListView.setOnChildClickListener(this);
-            expandableListView.setOnGroupClickListener(this);
         }
         else
         {
