@@ -7,9 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.activeandroid.query.Select;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import comstoresearchqmobotech.google.httpsplay.activeandroid.adapter.ExpandableListAdapter;
+import comstoresearchqmobotech.google.httpsplay.activeandroid.database.DataItems;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Child;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Group;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.Apis;
@@ -23,37 +27,53 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     private ExpandableListAdapter adapter;
     private ArrayList<Group> dataList;
 
+    private List<String> titleList ;
+    private List<String> descList ;
+    private List<String> titleLink ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getData();
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        expandableListView.setGroupIndicator(null);
-        dataList = getGroupList();
-        expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
-        expandableListView.setOnChildClickListener(this);
-        expandableListView.setOnGroupClickListener(this);
 
     }
 
+    private void dataForExpandableList(){
+
+        List<DataItems> queryResults = new Select().from(DataItems.class).orderBy("Id ASC").execute();
+
+        titleList = new ArrayList<>();
+        descList = new ArrayList<>();
+        titleLink = new ArrayList<>();
+
+        for(int i = 10; i < 20 ; i++){
+            titleList.add(queryResults.get(i).getTitle());
+            descList.add(queryResults.get(i).getDescription());
+            titleLink.add(queryResults.get(i).getTitleLink());
+        }
+
+    }
+
+
     private ArrayList<Group> getGroupList() {
 
-        int[] imageViewRing = {R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring};
-        String[] textViewNum = {"1" , "2" , "3"};
-        String[] textViewTitle = {"title 1" , "title 2" , "title 3"};
-        String[] textViewDescription = {"description1", "description 2" , "description 3"};
+
+        int[] imageViewRing = {R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring , R.drawable.ring ,
+                R.mipmap.ic_launcher , R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring , R.drawable.ring
+                , R.mipmap.ic_launcher};
+        String[] textViewNum = {"1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "10"};
         int[] imageViewShare = { R.mipmap.ic_launcher};
 
         ArrayList<Group> list = new ArrayList<>();
         ArrayList<Child> childArrayList = null;
 
-        for (int i = 0 ; i < textViewDescription.length ; i++){
+        for (int i = 0 ; i < textViewNum.length ; i++){
             Group group = new Group();
             group.setGroupImage(imageViewRing[i]);
             group.setGroupNum(textViewNum[i]);
-            group.setGroupTitle(textViewTitle[i]);
-            group.setGroupTitleDescription(textViewDescription[i]);
+            group.setGroupTitle(titleList.get(i));
+            group.setGroupTitleDescription(descList.get(i));
 
             for(int j = 0 ; j < 1 ; j++){
 
@@ -70,8 +90,19 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     }
 
     @Override
-    public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-        MyToast.showToast(getApplicationContext() , "Child Item is clicked");
+    public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+
+        switch (groupPosition){
+            case 0:
+                MyToast.showToast(getApplicationContext() , "Child Item: "+ titleLink.get(0));
+                break;
+            case 1:
+                MyToast.showToast(getApplicationContext() , "Child Item: "+ titleLink.get(1));
+                break;
+            case 2:
+                MyToast.showToast(getApplicationContext() , "Child Item: "+ titleLink.get(2));
+                break;
+        }
         return false;
     }
 
@@ -96,6 +127,13 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         if(MyUtils.isTableDataExists())
         {
             MyToast.showToast(this, "Show data from Database");
+            expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+            expandableListView.setGroupIndicator(null);
+            dataForExpandableList();
+            dataList = getGroupList();
+            expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
+            expandableListView.setOnChildClickListener(this);
+            expandableListView.setOnGroupClickListener(this);
         }
         else
         {
