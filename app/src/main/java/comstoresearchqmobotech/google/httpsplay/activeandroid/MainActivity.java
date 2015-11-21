@@ -39,11 +39,18 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         setContentView(R.layout.activity_main);
         getData();
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListViewJob();
+
+    }
+
+    private void expandableListViewJob(){
+
         expandableListView.setGroupIndicator(null);
         MyParser.response = this;
         dataForExpandableList();
         dataList = getGroupList();
-        expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
+        adapter = new ExpandableListAdapter(this , dataList);
+        expandableListView.setAdapter(adapter);
         expandableListView.setOnChildClickListener(this);
         expandableListView.setOnGroupClickListener(this);
 
@@ -178,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
 
     @Override
     public void myResponse(boolean responseStatus) {
-        MyLog.showLog(responseStatus+"");
-
+        MyLog.showLog(responseStatus + "");
+        expandableListViewJob();
     }
 }
