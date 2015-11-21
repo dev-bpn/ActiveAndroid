@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     private ArrayList<Group> getGroupList() {
 
 
-        int[] imageViewRing = {R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring , R.drawable.ring ,
-                R.mipmap.ic_launcher , R.drawable.ring , R.mipmap.ic_launcher , R.drawable.ring , R.drawable.ring
-                , R.mipmap.ic_launcher};
+        int[] imageViewRing = {R.drawable.ring1, R.drawable.ring2 , R.drawable.ring3, R.drawable.ring4,
+                R.drawable.ring5 , R.drawable.ring1, R.drawable.ring2 , R.drawable.ring3, R.drawable.ring4
+                , R.drawable.ring5};
         String[] textViewNum = {"1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "10"};
         int[] imageViewShare = { R.mipmap.ic_launcher};
 
