@@ -113,15 +113,21 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
         switch (position){
             case 0:
-                if(MainActivity.listClick.size() > 0){
+                if(MainActivity.listClick.containsKey("key0")){
                     imageView.setImageResource(R.drawable.ring1fill);
                 }
                 textView.setTextColor(context.getResources().getColor(R.color.red));
                 break;
             case 1:
+                if(MainActivity.listClick.containsKey("key1")){
+                    imageView.setImageResource(R.drawable.ring2fill);
+                }
                 textView.setTextColor(context.getResources().getColor(R.color.purple));
                 break;
             case 2:
+                if(MainActivity.listClick.containsKey("key2")){
+                    imageView.setImageResource(R.drawable.ring3filll);
+                }
                 textView.setTextColor(context.getResources().getColor(R.color.blue));
                 break;
             case 3:

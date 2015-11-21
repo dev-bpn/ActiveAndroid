@@ -10,7 +10,9 @@ import android.widget.ExpandableListView;
 import com.activeandroid.query.Select;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import comstoresearchqmobotech.google.httpsplay.activeandroid.adapter.ExpandableListAdapter;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.DataItems;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     private List<String> descList ;
     private List<String> titleLink ;
 
-    public static ArrayList<Integer> listClick = new ArrayList();
+    public static Map<String , String> listClick = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,15 +133,15 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
         switch (i){
             case 0:
-                listClick.add(i);
+                listClick.put("key0" , "0");
                 MyToast.showToast(getApplicationContext(), "Group Item 1 is clicked");
                 break;
             case 1:
-                listClick.add(i);
+                listClick.put("key1" , "1");
                 MyToast.showToast(getApplicationContext() , "Group Item 2 is clicked");
                 break;
             case 2:
-                listClick.add(i);
+                listClick.put("key2" , "2");
                 MyToast.showToast(getApplicationContext() , "Group Item 3 is clicked");
                 break;
         }
