@@ -14,17 +14,19 @@ import java.util.List;
 
 import comstoresearchqmobotech.google.httpsplay.activeandroid.adapter.ExpandableListAdapter;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.database.DataItems;
+import comstoresearchqmobotech.google.httpsplay.activeandroid.log.MyLog;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Child;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Group;
+import comstoresearchqmobotech.google.httpsplay.activeandroid.my_interface.MyResponse;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.Apis;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.parsing.MyParser;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.toast.MyToast;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.utils.MyUtils;
 
-public class MainActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener, ExpandableListView.OnGroupClickListener {
+public class MainActivity extends AppCompatActivity implements ExpandableListView.OnChildClickListener, ExpandableListView.OnGroupClickListener , MyResponse {
 
-    private ExpandableListView expandableListView;
-    private ExpandableListAdapter adapter;
+    public static ExpandableListView expandableListView;
+    public static ExpandableListAdapter adapter;
     private ArrayList<Group> dataList;
 
     private List<String> titleList ;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         getData();
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListView.setGroupIndicator(null);
+        MyParser.response = this;
         dataForExpandableList();
         dataList = getGroupList();
         expandableListView.setAdapter(new ExpandableListAdapter(this, dataList));
@@ -173,4 +176,9 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void myResponse(boolean responseStatus) {
+        MyLog.showLog(responseStatus+"");
+
+    }
 }

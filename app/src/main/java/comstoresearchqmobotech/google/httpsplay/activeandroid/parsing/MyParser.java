@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import comstoresearchqmobotech.google.httpsplay.activeandroid.log.MyLog;
+import comstoresearchqmobotech.google.httpsplay.activeandroid.my_interface.MyResponse;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.toast.MyToast;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.utils.MyUtils;
 
@@ -25,6 +26,7 @@ import comstoresearchqmobotech.google.httpsplay.activeandroid.utils.MyUtils;
 public class MyParser {
 
     private static ProgressDialog progressDialog;
+    public static MyResponse response;
 
     public static void performVolleyRequest(final Context context , String url){
         progressDialog(context);
@@ -74,6 +76,8 @@ public class MyParser {
             e.printStackTrace();
         }finally {
             MyToast.showToast(context , "Successfully updated");
+            response.myResponse(true);
+            MyLog.showLog("");
         }
     }
 
