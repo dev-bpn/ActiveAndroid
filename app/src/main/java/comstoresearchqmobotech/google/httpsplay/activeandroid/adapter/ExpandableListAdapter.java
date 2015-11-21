@@ -111,13 +111,34 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
         switch (position){
             case 0:
-                textView.setTextColor(context.getResources().getColor(R.color.link_text_material_dark));
+                textView.setTextColor(context.getResources().getColor(R.color.red));
                 break;
             case 1:
-                textView.setTextColor(context.getResources().getColor(R.color.material_deep_teal_200));
+                textView.setTextColor(context.getResources().getColor(R.color.purple));
                 break;
             case 2:
-                textView.setTextColor(context.getResources().getColor(R.color.link_text_material_light));
+                textView.setTextColor(context.getResources().getColor(R.color.blue));
+                break;
+            case 3:
+                textView.setTextColor(context.getResources().getColor(R.color.green));
+                break;
+            case 4:
+                textView.setTextColor(context.getResources().getColor(R.color.teal));
+                break;
+            case 5:
+                textView.setTextColor(context.getResources().getColor(R.color.orange));
+                break;
+            case 6:
+                textView.setTextColor(context.getResources().getColor(R.color.indigo));
+                break;
+            case 7:
+                textView.setTextColor(context.getResources().getColor(R.color.yellow));
+                break;
+            case 8:
+                textView.setTextColor(context.getResources().getColor(R.color.grey));
+                break;
+            case 9:
+                textView.setTextColor(context.getResources().getColor(R.color.pink));
                 break;
         }
     }
