@@ -78,6 +78,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         ImageView imageViewRing = (ImageView) view.findViewById(R.id.imageViewRing);
         TextView textViewNum = (TextView) view.findViewById(R.id.textViewNum);
         TextView textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+        coloringTitle(i , textViewTitle);
         TextView textViewDescription = (TextView) view.findViewById(R.id.textViewTitleDescription);
 
         imageViewRing.setImageResource(group.getGroupImage());
@@ -88,9 +89,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         return view;
     }
 
+
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        Child child = (Child) getChild(i , i1);
+        Child child = (Child) getChild(i, i1);
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_child , null);
@@ -103,5 +105,20 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return true;
+    }
+
+    private void coloringTitle(int position , TextView textView) {
+
+        switch (position){
+            case 0:
+                textView.setTextColor(context.getResources().getColor(R.color.link_text_material_dark));
+                break;
+            case 1:
+                textView.setTextColor(context.getResources().getColor(R.color.material_deep_teal_200));
+                break;
+            case 2:
+                textView.setTextColor(context.getResources().getColor(R.color.link_text_material_light));
+                break;
+        }
     }
 }
