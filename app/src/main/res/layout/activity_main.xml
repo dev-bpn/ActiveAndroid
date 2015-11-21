@@ -12,5 +12,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:childDivider="@color/primary_material_light"/>
+        android:childDivider="@color/primary_material_light"
+        android:scrollbars="none"/>
 </RelativeLayout>
