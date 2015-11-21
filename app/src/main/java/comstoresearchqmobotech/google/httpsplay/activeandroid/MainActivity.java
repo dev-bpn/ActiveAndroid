@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     private List<String> titleList ;
     private List<String> descList ;
     private List<String> titleLink ;
+    private List<String> imageLink ;
 
     public static Map<String , String> listClick = new HashMap();
 
@@ -68,11 +69,13 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
             titleList = new ArrayList<>();
             descList = new ArrayList<>();
             titleLink = new ArrayList<>();
+            imageLink = new ArrayList<>();
 
             for (int i = 10; i < 20; i++) {
                 titleList.add(queryResults.get(i).getTitle());
                 descList.add(queryResults.get(i).getDescription());
                 titleLink.add(queryResults.get(i).getTitleLink());
+                imageLink.add(queryResults.get(i).getImage());
             }
         }
     }
