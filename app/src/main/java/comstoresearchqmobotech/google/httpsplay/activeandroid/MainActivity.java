@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     private List<String> descList ;
     private List<String> titleLink ;
 
+    public static ArrayList<Integer> listClick = new ArrayList();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,12 +131,15 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
         switch (i){
             case 0:
-                MyToast.showToast(getApplicationContext() , "Group Item 1 is clicked");
+                listClick.add(i);
+                MyToast.showToast(getApplicationContext(), "Group Item 1 is clicked");
                 break;
             case 1:
+                listClick.add(i);
                 MyToast.showToast(getApplicationContext() , "Group Item 2 is clicked");
                 break;
             case 2:
+                listClick.add(i);
                 MyToast.showToast(getApplicationContext() , "Group Item 3 is clicked");
                 break;
         }

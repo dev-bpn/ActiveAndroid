@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import comstoresearchqmobotech.google.httpsplay.activeandroid.MainActivity;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.R;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Child;
 import comstoresearchqmobotech.google.httpsplay.activeandroid.model.Group;
@@ -78,13 +79,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         ImageView imageViewRing = (ImageView) view.findViewById(R.id.imageViewRing);
         TextView textViewNum = (TextView) view.findViewById(R.id.textViewNum);
         TextView textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
-        coloringTitle(i , textViewTitle);
         TextView textViewDescription = (TextView) view.findViewById(R.id.textViewTitleDescription);
 
         imageViewRing.setImageResource(group.getGroupImage());
         textViewNum.setText(group.getGroupNum());
         textViewTitle.setText(group.getGroupTitle());
         textViewDescription.setText(group.getGroupTitleDescription());
+
+        coloringTitle(i, textViewTitle , imageViewRing);
 
         return view;
     }
@@ -107,10 +109,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
         return true;
     }
 
-    private void coloringTitle(int position , TextView textView) {
+    private void coloringTitle(int position , TextView textView , ImageView imageView) {
 
         switch (position){
             case 0:
+                if(MainActivity.listClick.size() > 0){
+                    imageView.setImageResource(R.drawable.ring1fill);
+                }
                 textView.setTextColor(context.getResources().getColor(R.color.red));
                 break;
             case 1:
